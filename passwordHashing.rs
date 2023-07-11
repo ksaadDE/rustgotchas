@@ -15,6 +15,7 @@ use scrypt::Scrypt;
 
 struct HashPack();
 
+// abstracted it in HashPack impl for struct
 impl HashPack {
 
     // TAKE: https://stackoverflow.com/posts/74954705/revisions
@@ -23,6 +24,7 @@ impl HashPack {
             salt: &'a SaltString,
     ) -> Result<String, Error> //Result<PasswordHash<'a>, Error>
     {
+        // obtain the hashed pw and match if it worked, on error return the error, on success return hash as String
         let hashed_password = &Pbkdf2.hash_password(&bytes_to_hash, salt);
         match hashed_password
         {
@@ -38,6 +40,7 @@ impl HashPack {
         // Trait objects for algorithms to support
         let algs: &[&dyn PasswordVerifier] = &[&Argon2::default(), &Pbkdf2, &Scrypt];
 
+        // return true or false, if ok or not. 
         return match password_hash.verify_password(algs, input_password)
         {
             Ok(_) => true,
@@ -48,17 +51,17 @@ impl HashPack {
 
 fn main () 
 {
-      let salt = SaltString::generate(&mut OsRng);
-      let hash = HashPack::get_passwordhash_object(input.field.as_bytes(), &salt);
+      let salt = SaltString::generate(&mut OsRng); // Generate a random salt using OS (secure?) Random Number Generator (RNG)
+      let hash = HashPack::get_passwordhash_object(input.field.as_bytes(), &salt); // call get_pw_hash_obj here, input is your plaintext pw -> bytes
   
       match hash
       {
           Ok(h) => {
-              if HashPack::verify_hash(input.field, &h)
+              println!("Success Hashing:{}", h)
+              if HashPack::verify_hash(input.field, &h) // call the Hashpack -> verify_hash func input.field is your plaintext pw, h is your hash
               {
-                  println!("Success 2221");
+                  println!("Success Verify Hash");
               }
-              println!("Success:{}", h)
           },
           Err(e) => println!("Error: {}", e)
       };
