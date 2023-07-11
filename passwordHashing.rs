@@ -1,5 +1,5 @@
 /*
-  Example on how to use the password hashing crate with pbkdf2
+  Example on how to use the passwordHashing + RustCrypto crate with pbkdf2
 */
 use argon2::Argon2;
 use scrypt::Scrypt;
