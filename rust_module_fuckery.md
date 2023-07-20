@@ -22,7 +22,7 @@ In the `src/bin/submodule.rs` you can improt the module specified in lib.rs:
 The (dis)advantage of multiple bin crates is obvious, you will need to execute them individually using `--bin` flag of the compiler / runner, e.g. `cargo run --bin <fname without rs>`
 
 ## How to import stuff globally using `lib.rs`?
-Nice to know is also that you can import things like Rocket or Diesel globally using Lib.rs:
+Nice to know is also that you can "import" external crates like Rocket or Diesel globally using Lib.rs:
 ```rust
 // lib.rs
 // your consts here
@@ -33,6 +33,7 @@ extern crate rocket;
 extern crate rocket_dyn_templates; // optional
 extern crate diesel;
 ```
+Note: Obviously the `use` keyword in the mentioned binary crates, so the module(s) (files), needs to be used to import the external crates.  
 
 ## How to find the project name?
 In `Cargo.toml` is the project name defined!
