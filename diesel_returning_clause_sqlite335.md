@@ -1,5 +1,5 @@
 # How to use SQLite3.35+ and Diesel?
-Sadly, the [Diesel Sqlite3 examples](https://github.com/diesel-rs/diesel/tree/master/examples/sqlite) does not contain any hint for the needed [Diesel PR 3004](https://github.com/diesel-rs/diesel/pull/3004). 
+Sadly, the [Diesel Sqlite3 examples](https://github.com/diesel-rs/diesel/tree/master/examples/sqlite) do not contain any hint for the needed [Diesel PR 3004](https://github.com/diesel-rs/diesel/pull/3004). 
 The PR adds a RUST Cargo feature for Diesel. 
 
 Despite the importance of the cargo feature `returning_clauses_for_sqlite_3_35` it is not mentioned at all. The feature is required for the [Diesel returning clause](https://github.com/toxeus/diesel/blob/fda3410c1715a7cf57ae08f7969e297aa1762217/diesel_tests/tests/insert.rs#L214) in the SQLite context of Diesel. 
