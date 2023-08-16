@@ -32,7 +32,22 @@ pub struct NewTask {
 ```
 
 ## Implement the converters
-You need the following enum and Diesel converters (to_sql, from_sql). Two important aspects! Text is a diesel type, and the DB Type must be defined next to it. `set_value` allows a direct setting of the "return" value. However, additionally for this the Traits from strum are used. 
+You need the following enum and Diesel converters (to_sql, from_sql). The `set_value` in the function allows a direct setting of the "return" value. 
+
+Two important aspects regarding e.g. `ToSql<Text, diesel::sqlite::Sqlite>`! 
+- `Text` is a diesel type (=`diesel::sql_types::Text`, those can be found [here](https://docs.rs/diesel/latest/diesel/sql_types/index.html))
+- the DB Type must be defined next to it e.g. `diesel::sqlite::Sqlite` (works for PG and MySQL the same way)
+
+The DB types are:
+- `diesel::sqlite::Sqlite` [Sqlite DB Struct](https://docs.rs/diesel/latest/diesel/sqlite/index.html)
+- `diesel::pg::Pg` [PG DB Struct](https://docs.rs/diesel/latest/diesel/pg/struct.Pg.html)
+- `diesel::mysql::Mysql` [MySQL DB Struct](https://docs.rs/diesel/latest/diesel/mysql/struct.Mysql.html)
+
+To make the converting easier the `Strum` Traits are used. Strum needs to be installed additionally. Either by using cargo add or editing the `cargo.toml`
+
+**WARN:** Do not forget to add "sqlite" to the features array in `cargo.toml`!
+
+
 ```rust
 use strum_macros::{Display, EnumString};
 use crate::models::deserialize::FromSqlRow;
