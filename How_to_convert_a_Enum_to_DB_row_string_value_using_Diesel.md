@@ -1,4 +1,5 @@
 # How to convert a Enum to DB row string value using Diesel? 
+You are embaressed that you can not get your string based Enum saved to DB? No worries, I got you.  
 
 # DB Entity Scheme
 Lets take, for example, this DB Entity Scheme:
